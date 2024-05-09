@@ -63,8 +63,8 @@ public class AccountServiceImpl implements AccountService {
         bankEntity.setTotalTransferAmount(bankEntity.getTotalTransferAmount() + amount);
 
         if (bankEntity.getTransactionFlatFeeAmount() < amount * bankEntity.getTransactionPercentFeeValue()/100) {
-            account.setBalance(account.getBalance() + amount - amount * bankEntity.getTransactionPercentFeeValue()/100);
-            bankEntity.setTotalTransactionFeeAmount(bankEntity.getTotalTransactionFeeAmount() + (amount * bankEntity.getTransactionPercentFeeValue()/100));
+            account.setBalance(formatNumber(account.getBalance() + amount - amount * bankEntity.getTransactionPercentFeeValue()/100));
+            bankEntity.setTotalTransactionFeeAmount(formatNumber(bankEntity.getTotalTransactionFeeAmount() + (amount * bankEntity.getTransactionPercentFeeValue()/100)));
         } else {
             account.setBalance(account.getBalance() + amount - bankEntity.getTransactionFlatFeeAmount());
             bankEntity.setTotalTransactionFeeAmount(bankEntity.getTotalTransactionFeeAmount() + bankEntity.getTransactionFlatFeeAmount());
@@ -96,8 +96,8 @@ public class AccountServiceImpl implements AccountService {
 
         if (bankEntity.getTransactionFlatFeeAmount() < amount * bankEntity.getTransactionPercentFeeValue()/100) {
             if (account.getBalance() - amount - amount * bankEntity.getTransactionPercentFeeValue()/100 >= 0) {
-                account.setBalance(account.getBalance() - amount - (amount * bankEntity.getTransactionPercentFeeValue()/100));
-                bankEntity.setTotalTransactionFeeAmount(bankEntity.getTotalTransactionFeeAmount() + (amount * bankEntity.getTransactionPercentFeeValue()/100));
+                account.setBalance(formatNumber(account.getBalance() - amount - (amount * bankEntity.getTransactionPercentFeeValue()/100)));
+                bankEntity.setTotalTransactionFeeAmount(formatNumber(bankEntity.getTotalTransactionFeeAmount() + (amount * bankEntity.getTransactionPercentFeeValue()/100)));
             } else throw new BadRequestException("Not enough money to withdraw");
         } else {
             if (account.getBalance() - amount - bankEntity.getTransactionFlatFeeAmount() >= 0) {
@@ -135,8 +135,8 @@ public class AccountServiceImpl implements AccountService {
 
         if (bankFrom.getTransactionFlatFeeAmount() < amount * bankFrom.getTransactionPercentFeeValue()/100) {
             if (accountFrom.getBalance() - amount - amount * bankFrom.getTransactionPercentFeeValue()/100 >= 0) {
-                accountFrom.setBalance(accountFrom.getBalance() - amount - (amount * bankFrom.getTransactionPercentFeeValue()));
-                bankFrom.setTotalTransactionFeeAmount(bankFrom.getTotalTransactionFeeAmount() + (amount * bankFrom.getTransactionPercentFeeValue()/100));
+                accountFrom.setBalance(formatNumber(accountFrom.getBalance() - amount - (amount * bankFrom.getTransactionPercentFeeValue()/100)));
+                bankFrom.setTotalTransactionFeeAmount(formatNumber(bankFrom.getTotalTransactionFeeAmount() + (amount * bankFrom.getTransactionPercentFeeValue()/100)));
             } else throw new BadRequestException("Not enough money to withdraw");
         } else {
             if (accountFrom.getBalance() - amount - bankFrom.getTransactionFlatFeeAmount() >= 0) {

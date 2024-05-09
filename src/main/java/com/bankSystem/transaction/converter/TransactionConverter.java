@@ -11,6 +11,7 @@ public class TransactionConverter {
         TransactionResponse transactionResponse = new TransactionResponse();
         transactionResponse.setTransactionId(transaction.getId());
         transactionResponse.setReason(transaction.getReason());
+        transactionResponse.setAmount(transaction.getAmount());
         transactionResponse.setOriginatingAccountId(transaction.getOriginating().getId());
         transactionResponse.setOriginatingUserAccountName(transaction.getOriginating().getUser_name());
         transactionResponse.setOriginatingAccountBankName(transaction.getOriginating().getBankEntity().getName());

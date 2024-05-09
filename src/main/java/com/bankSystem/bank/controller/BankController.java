@@ -4,6 +4,7 @@ import com.bankSystem.bank.dto.BankRequest;
 import com.bankSystem.bank.dto.BankResponse;
 import com.bankSystem.bank.service.BankService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,25 +17,26 @@ public class BankController {
     private final BankService bankService;
 
     @PostMapping
-    public void addBank(@RequestBody BankRequest request) {
+    public ResponseEntity<Void> addBank(@RequestBody BankRequest request) {
         bankService.addBank(request);
+        return ResponseEntity.ok().build();
     }
     @GetMapping("/findById/{bankId}")
-    public BankResponse findById(@PathVariable Integer bankId) {
-        return bankService.findById(bankId);
+    public ResponseEntity<BankResponse> findById(@PathVariable Integer bankId) {
+        return ResponseEntity.ok(bankService.findById(bankId));
     }
     @GetMapping
-    public List<BankResponse> findAll() {
-        return bankService.findAll();
+    public ResponseEntity<List<BankResponse>> findAll() {
+        return ResponseEntity.ok(bankService.findAll());
     }
 
     @GetMapping("/getTotalTransferAmount/{bankId}")
-    public Double getTotalTransferAmount(@PathVariable Integer bankId) {
-        return bankService.getTotalTransferAmount(bankId);
+    public ResponseEntity<Double> getTotalTransferAmount(@PathVariable Integer bankId) {
+        return ResponseEntity.ok(bankService.getTotalTransferAmount(bankId));
     }
 
     @GetMapping("/getTotalTransactionFeeAmount/{bankId}")
-    public Double getTotalTransactionFeeAmount(@PathVariable Integer bankId) {
-        return bankService.getTotalTransactionFeeAmount(bankId);
+    public ResponseEntity<Double> getTotalTransactionFeeAmount(@PathVariable Integer bankId) {
+        return ResponseEntity.ok(bankService.getTotalTransactionFeeAmount(bankId));
     }
 }

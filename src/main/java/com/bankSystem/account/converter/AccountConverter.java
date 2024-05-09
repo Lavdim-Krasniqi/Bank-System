@@ -4,6 +4,7 @@ import com.bankSystem.account.dto.AccountRequest;
 import com.bankSystem.account.dto.AccountResponse;
 import com.bankSystem.account.entity.AccountEntity;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class AccountConverter {
@@ -11,7 +12,7 @@ public class AccountConverter {
     public static AccountEntity toEntity(AccountRequest request){
         AccountEntity entity = new AccountEntity();
         entity.setUser_name(request.getUser_name());
-        entity.setBalance(request.getBalance());
+        entity.setBalance(Double.parseDouble(new DecimalFormat("#.00").format(request.getBalance())));;
         return entity;
     }
     public static AccountResponse toResponse(AccountEntity entity){

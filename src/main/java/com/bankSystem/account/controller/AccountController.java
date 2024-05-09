@@ -7,6 +7,7 @@ import com.bankSystem.account.dto.WithdrawDepositRequest;
 import com.bankSystem.account.service.AccountService;
 import com.bankSystem.transaction.dto.TransactionResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,23 +21,27 @@ public class AccountController {
 
 
     @PostMapping
-    public void createAccount(@RequestBody AccountRequest request) {
-        accountService.createAccount(request);
+    public ResponseEntity<Void> createAccount(@RequestBody AccountRequest request) {
+         accountService.createAccount(request);
+         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/deposit")
-    public void deposit(@RequestBody WithdrawDepositRequest request) {
+    public ResponseEntity<Void> deposit(@RequestBody WithdrawDepositRequest request) {
         accountService.deposit(request);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/withdrawal")
-    public void withdrawal(@RequestBody WithdrawDepositRequest request) {
+    public ResponseEntity<Void> withdrawal(@RequestBody WithdrawDepositRequest request) {
         accountService.withdrawal(request);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/transfer")
-    public void transfer(@RequestBody TransferRequest transferRequest) {
+    public ResponseEntity<Void> transfer(@RequestBody TransferRequest transferRequest) {
         accountService.transfer(transferRequest);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/findById/{id}")
@@ -45,23 +50,23 @@ public class AccountController {
     }
 
     @GetMapping
-    public List<AccountResponse> findAllAccounts() {
-        return accountService.findAllAccounts();
+    public ResponseEntity<List<AccountResponse>> findAllAccounts() {
+        return ResponseEntity.ok(accountService.findAllAccounts());
     }
 
     @GetMapping("/findAllAccountsByBankId/{bankId}")
-    public List<AccountResponse> findAllAccountsByBankId(@PathVariable Integer bankId) {
-        return accountService.findAllAccountsByBankId(bankId);
+    public ResponseEntity<List<AccountResponse>> findAllAccountsByBankId(@PathVariable Integer bankId) {
+        return ResponseEntity.ok(accountService.findAllAccountsByBankId(bankId));
     }
 
     @GetMapping("/getAllTransactionByAccountId/{accountId}")
-    public List<TransactionResponse> getTransactionsByAccountId(@PathVariable Integer accountId) {
-        return accountService.getTransactionsByAccountId(accountId);
+    public ResponseEntity<List<TransactionResponse>> getTransactionsByAccountId(@PathVariable Integer accountId) {
+        return ResponseEntity.ok(accountService.getTransactionsByAccountId(accountId));
     }
 
     @GetMapping("/checkAccountBalance/{accountId}")
-    public Double checkAccountBalance(@PathVariable Integer accountId) {
-        return accountService.checkAccountBalance(accountId);
+    public ResponseEntity<Double> checkAccountBalance(@PathVariable Integer accountId) {
+        return ResponseEntity.ok(accountService.checkAccountBalance(accountId));
     }
 
 }

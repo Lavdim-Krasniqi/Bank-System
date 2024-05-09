@@ -6,6 +6,7 @@ import lombok.Data;
 public class TransactionResponse {
 
     private Integer transactionId;
+    private Double amount;
     private String reason;
     private String originatingAccountBankName;
     private Integer originatingAccountId;
