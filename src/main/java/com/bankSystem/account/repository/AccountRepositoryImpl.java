@@ -42,7 +42,7 @@ public class AccountRepositoryImpl implements AccountRepository {
 
     @Override
     public Double getBalance(Integer accountId) {
-        return entityManager.createQuery("select a.balance from AccountEntity a", Double.class).getSingleResult();
+        return entityManager.createQuery("select a.balance from AccountEntity a where a.id = :id", Double.class).setParameter("id", accountId).getSingleResult();
     }
 
 }
