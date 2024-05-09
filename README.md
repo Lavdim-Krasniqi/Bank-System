@@ -120,7 +120,7 @@ This ensures that the fee charged is optimized for both small and large transact
     }
     ```
 - **List Of Transaction For Account**:
-  - **Method**: GET /checkAccountBalance/{accountId}
+  - **Method**: GET 
   - **Endpoint**: `GET http://localhost:8080/account/getAllTransactionByAccountId/{id}`
  
 - **Get Balance Of Account**:
